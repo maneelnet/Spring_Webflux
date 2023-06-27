@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Flux<User> findByName(String name) {
+        return userRepository.findUsersByName(name);
+    }
+
+    @Override
     public Mono<User> updateUser(String id, User user) {
         return userRepository.findById(id)
                 .flatMap(dbUser -> {

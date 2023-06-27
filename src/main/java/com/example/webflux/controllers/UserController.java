@@ -34,6 +34,11 @@ public class UserController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/user")
+    public Flux<User> getUsersByName(@RequestParam("name") String name) {
+        return userService.findByName(name);
+    }
+
     @PutMapping("/{userId}")
     public Mono<ResponseEntity<User>> updateUserById(@PathVariable String userId, @RequestBody User user){
         return userService.updateUser(userId,user)
