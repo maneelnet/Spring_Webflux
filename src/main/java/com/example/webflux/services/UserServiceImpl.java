@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Mono<User> findById(Long id) {
+    public Mono<User> findById(String id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public Mono<User> updateUser(Long id, User user) {
+    public Mono<User> updateUser(String id, User user) {
         return userRepository.findById(id)
                 .flatMap(dbUser -> {
                     dbUser.setName(user.getName());
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Mono<User> deleteUser(Long id) {
+    public Mono<User> deleteUser(String id) {
         return userRepository.findById(id)
                 .flatMap(existingUser -> userRepository.delete(existingUser)
                         .then(Mono.just(existingUser)));
